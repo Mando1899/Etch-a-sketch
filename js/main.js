@@ -8,16 +8,19 @@ function random_rgba() {
 
 // TODO: Make the createCanvas function faster.
 function createCanvas(CellNumber) {
+    let cell = document.createElement("div");
+    let size =  canvas.clientHeight / CellNumber;
+    cell.setAttribute("style", `display:block; width:${size}px; height:${size}px;`);
     for (let x = 0; x < CellNumber; x++) {
         for (let y = 0; y < CellNumber; y++){
-            let cell = document.createElement("div");
-            cell.classList.add("canvasElement");
-            let size =  canvas.clientHeight / CellNumber;
-            let color = random_rgba()
-            cell.setAttribute("style", `display:block; width:${size}px; height:${size}px; background-color: ${color}`);
-            canvas.appendChild(cell);
+            let clone = cell.cloneNode(true);
+            clone.addEventListener("mouseenter", () =>{
+                clone.style.backgroundColor = random_rgba();
+            });
+            canvas.appendChild(clone);
         }
     }
 }
 
 createCanvas(64);
+
