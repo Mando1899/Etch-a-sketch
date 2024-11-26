@@ -1,7 +1,16 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color:gainsboro;
+}
+
 #canvas {
     display: flex;
     flex-wrap: wrap;
     width: 500px;
     height: 500px;
-    background-color: antiquewhite;  
+    background-color: white;  
+    
 }

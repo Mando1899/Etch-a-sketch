@@ -1,5 +1,8 @@
 const canvas = document.getElementById("canvas");
-let MouseBtnDown = false
+const slider = document.getElementById("slider");
+console.log(slider.value);
+let MouseBtnDown = false;
+
 
 function random_rgba() {
     var o = Math.round, r = Math.random, s = 255;
@@ -22,12 +25,13 @@ function createCanvas(CellNumber) {
     let cell = document.createElement("div");
     let size =  canvas.clientHeight / CellNumber;
     cell.setAttribute("style", `display:block; width:${size}px; height:${size}px;`);
+    canvas.innerHTML = "";
     for (let x = 0; x < CellNumber; x++) {
         for (let y = 0; y < CellNumber; y++){
             let clone = cell.cloneNode(true);
             clone.addEventListener("mouseenter", () =>{
                 if (MouseBtnDown) {
-                    clone.style.backgroundColor = random_rgba();
+                    clone.style.backgroundColor = "black";
                 }
                 
             });
@@ -36,5 +40,6 @@ function createCanvas(CellNumber) {
     }
 }
 
-createCanvas(8);
-
+slider.addEventListener("input", function(event) {
+    createCanvas(event.target.value);
+});
