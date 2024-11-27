@@ -1,14 +1,19 @@
 const canvas = document.getElementById("canvas");
+
+let mode = "color";
+
 const slider = document.getElementById("slider");
-console.log(slider.value);
+slider.addEventListener("input", function(event) {
+    createCanvas(event.target.value);
+});
+
+const colorInput = document.getElementById("color-input");
+let brushColor = colorInput.value;
+colorInput.addEventListener("input", function(){
+    brushColor = colorInput.value;    
+});
+
 let MouseBtnDown = false;
-
-
-function random_rgba() {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-}
-
 document.addEventListener("mousedown", function(event) {
     if (event.button === 0){
         MouseBtnDown = true;
@@ -21,6 +26,33 @@ document.addEventListener("mouseup", function(event) {
     }
 });
 
+const colorModeBtn = document.getElementById("color-mode");
+colorModeBtn.addEventListener("click", () => {
+    mode = "color";
+});
+
+const rainbowModeBtn = document.getElementById("rainbow-mode");
+rainbowModeBtn.addEventListener("click", () => {
+    mode = "rainbow";
+});
+
+const eraserBtn = document.getElementById("eraser");
+eraserBtn.addEventListener("click", () => {
+    mode = "eraser";
+});
+
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", () =>{
+    createCanvas(slider.value);
+});
+
+function random_rgb() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+}
+
+
+
 function createCanvas(CellNumber) {
     let cell = document.createElement("div");
     let size =  canvas.clientHeight / CellNumber;
@@ -31,15 +63,23 @@ function createCanvas(CellNumber) {
             let clone = cell.cloneNode(true);
             clone.addEventListener("mouseenter", () =>{
                 if (MouseBtnDown) {
-                    clone.style.backgroundColor = "black";
-                }
-                
+                    if (mode === "color") clone.style.backgroundColor = brushColor;
+                    if (mode === "rainbow") clone.style.backgroundColor = random_rgb();
+                    if (mode === "eraser") clone.style.backgroundColor = "";               
+                }   
             });
+            clone.addEventListener("mousedown", () =>{
+                
+                    if (mode === "color") clone.style.backgroundColor = brushColor;
+                    if (mode === "rainbow") clone.style.backgroundColor = random_rgb();
+                    if (mode === "eraser") clone.style.backgroundColor = "";                               
+            });
+
+
             canvas.appendChild(clone);
         }
     }
 }
 
-slider.addEventListener("input", function(event) {
-    createCanvas(event.target.value);
-});
+createCanvas(8);
+

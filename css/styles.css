@@ -21,9 +21,8 @@ h1 {
 #settings {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     justify-items: center;
-    background-color: rgb(9, 6, 47);
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
