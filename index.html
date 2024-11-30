@@ -12,11 +12,14 @@
         <div id="main-container">
             <div id="settings">
                 <input type="color" id="color-input">
-                <button class="btn" id="color-mode">Color mode</button>
-                <button class="btn" id="rainbow-mode">Rainbow</button>
-                <button class="btn" id="eraser">Eraser</button>
+                <button class="btn mode active-btn mode" id="color">Color mode</button>
+                <button class="btn mode" id="rainbow">Rainbow</button>
+                <button class="btn mode" id="eraser">Eraser</button>
                 <button class="btn" id="clear-btn">Clear</button>
-                <input type="range" min="1" max="64" step="1" value="8" id="slider">
+                <div id="slider-div">
+                    <span id="slider-value">8x8</span>
+                    <input type="range" min="1" max="64" step="1" value="8" id="slider">
+                </div>
             </div>
             <div id="canvas"></div>
         </div>        

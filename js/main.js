@@ -3,8 +3,10 @@ const canvas = document.getElementById("canvas");
 let mode = "color";
 
 const slider = document.getElementById("slider");
+const sliderValue = document.getElementById("slider-value");
 slider.addEventListener("input", function(event) {
     createCanvas(event.target.value);
+    sliderValue.innerText = `${event.target.value}x${event.target.value}`;
 });
 
 const colorInput = document.getElementById("color-input");
@@ -26,12 +28,12 @@ document.addEventListener("mouseup", function(event) {
     }
 });
 
-const colorModeBtn = document.getElementById("color-mode");
+const colorModeBtn = document.getElementById("color");
 colorModeBtn.addEventListener("click", () => {
     mode = "color";
 });
 
-const rainbowModeBtn = document.getElementById("rainbow-mode");
+const rainbowModeBtn = document.getElementById("rainbow");
 rainbowModeBtn.addEventListener("click", () => {
     mode = "rainbow";
 });
@@ -46,10 +48,20 @@ clearBtn.addEventListener("click", () =>{
     createCanvas(slider.value);
 });
 
+document.querySelectorAll(".mode").forEach((button) => {
+    button.addEventListener("click", () => {
+        document.getElementsByClassName("active-btn")[0].classList.remove("active-btn");
+        button.classList.add("active-btn");
+    })
+});
+
+
 function random_rgb() {
     var o = Math.round, r = Math.random, s = 255;
     return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
 }
+
+
 
 
 
